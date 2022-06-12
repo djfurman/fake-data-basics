@@ -7,6 +7,7 @@ name = "pypi"
 faker = "*"
 pandas = "*"
 pyarrow = "*"
+pillow = "*"
 
 [dev-packages]
 
