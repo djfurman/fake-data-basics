@@ -18,11 +18,37 @@ def parquet_write(fake_data: list) -> None:
     )
 
 
+def make_fake_records(how_many: int) -> list:
+    records = []
+
+    for _ in range(how_many):
+        records.append(
+            {
+                "name": {
+                    "given": fake.first_name(),
+                    "surname": fake.last_name(),
+                },
+                "demographics": {
+                    "birth_date": fake.date_of_birth(
+                        minimum_age=18, maximum_age=122
+                    ).isoformat(),
+                },
+                "occupation": fake.job(),
+                "location": {
+                    "latitude": float(fake.latitude()),
+                    "longitude": float(fake.longitude()),
+                },
+            }
+        )
+
+    return records
+
+
 def main() -> None:
     # generate a list of fake records
-    records = [{"some": "data"}]
+    fake_stuff = make_fake_records(10_000)
 
-    parquet_write(records)
+    parquet_write(fake_stuff)
 
     print("complete")
 
